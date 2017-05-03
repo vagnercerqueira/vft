@@ -1,0 +1,56 @@
+<div class="row">
+	<div class="col-md-3 col-sm-6 col-xs-6">
+		<button type="button" data-url="{% url 'categoria_create' %}" class="btn btn-info js-create">Novo</button>
+	</div>
+	<div class="col-md-3 col-sm-6 col-xs-6 pull-right">		
+		<input type="text" value="{{ search }}" placeholder="Procurar..." class="search_ajax_table form-control">
+		</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-bordered table_crud" url="{% url 'table_categoria' %}">
+			<thead>
+				<tr class="col_order" order="{{ order }}">
+					<th>DESCRIÇÃO</th>
+					<th style="width: 5em; text-align: center">ACAO</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for categoria in categorias %}
+				<tr>
+					<td>{{ categoria.descricao|upper }}</td>
+					<td>
+						<a url_edit="{% url 'categoria_edit' categoria.id %}" class="btn btn-social-icon btn-bitbucket  btn-xs js-edit"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+						<a value="{{ categoria.id }}" class="btn btn-social-icon btn-google btn-xs"><i class="fa fa-trash"></i></a>
+					</td>
+				</tr>				
+			{% endfor %}				
+			</tbody>
+		</table>
+		{% if categorias.has_other_pages %}
+		<ul class="pagination  no-margin pull-right">
+		{% if categorias.has_previous %}
+		  <li><a href="javascript:;"  class="btn_ajax_table" page="{{ categorias.previous_page_number }}">&laquo;</a></li>
+		{% else %}
+		  <li class="disabled"><span>&laquo;</span></li>
+		{% endif %}
+		{% for i in page_range %}
+			
+			  {% if categorias.number == i %}
+				<li class="active" page="{{ i }}"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+			  {% else %}
+				<li><a href="javascript:;" class="btn_ajax_table" page="{{ i }}">{{ i }}</a></li>
+			  {% endif %}
+			
+		{% endfor %}
+		{% if categorias.has_next %}
+		  <li><a href="javascript:;" class="btn_ajax_table" page="{{ categorias.next_page_number }}" attr>&raquo;</a></li>
+		{% else %}
+		  <li class="disabled"><span>&raquo;</span></li>
+		{% endif %}
+		</ul>
+		{% endif %}	
+		{{ categorias.start_index }} ate {{ categorias.end_index }} de {{ categorias.paginator.count }} registros
+
+	</div>
+</div>	

@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+        <title>Maruti Admin</title><meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-responsive.min.css' %}">        
+        <link rel="stylesheet" href="{% static 'css/maruti-login.css' %}" />
+    </head>
+    <body>
+        <div id="loginbox">            
+            <form class="form-vertical" method="post">       
+            {% csrf_token %}
+				 <div class="control-group normal_text"> <h3><img src="img/logo.png" alt="Logo" /></h3></div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on"><i class="icon-user"></i></span><input type="text" required="" name="username" placeholder="Username" />
+                        </div>
+                        <div class="main_input_box">
+                            <span class="add-on"><i class="icon-lock"></i></span><input type="password" required=""  name="password" placeholder="Password" />
+                        </div>
+                        {% if form.errors %}
+                            <div class="main_input_box" style="color:red;">
+                                Usuário ou Senha incorretos. Tente novamente!
+                            </div>                            
+                        {% endif %}                                                     
+                    </div>
+                </div>               
+                <div class="form-actions">
+                    <span class="pull-right"><input type="submit" class="btn btn-success" value="Login" /></span>
+                </div>
+            </form>
+        </div>
+        <script src="{% static 'js/jquery.min.js' %}"></script>                
+        <script src="{% static 'js/maruti.login.js' %}"></script> 
+    </body>
+</html>

@@ -1,0 +1,30 @@
+
+{% csrf_token %}
+<div class="row">
+{% for field in form %}
+	<div class="col-md-6">
+		<div class="form-group">
+		  <label for="{{ field.label }}">{{ field.label }}</label>
+		  <input class="form-control" required="" name="{{ field.name }}" type="text">
+		{% for error in field.errors %}
+		  <span class="help-block" style="color: red">{{ error }}</span>
+		{% endfor %}  		  
+		</div>
+		<div>
+			{{ field.help_text|safe }}
+		</div>
+	</div>
+</div>	
+{% endfor %}
+<div class="row">
+	<div class="col-md-3 col-xs-12 col-sm-12">
+		<button type="submit" class="btn btn-success js-insert"  data-url="{% url 'categoria_create' %}" >Salvar</button>
+		<button type="reset"  class="btn btn-danger">Limpar</button>
+		<button type="button" class="btn btn-primary btn_listagem" data-url="{% url 'table_categoria' %}">Listagem</button>
+	</div>
+	<div class="col-md-9 col-xs-12 col-sm-12">
+		<div class="alert alert-success alert-dismissible" style="display: none;padding: 0.4em;" role="alert"> 			
+		 	<strong>Holy guacamole!</strong> Best check yo self, you're not looking too good. 
+		</div>			
+	</div>
+</div>
